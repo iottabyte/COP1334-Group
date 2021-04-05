@@ -14,6 +14,7 @@
 
 // header files
 #include <iostream>
+#include <string>
 using namespace std;
 
 // function prototypes
@@ -23,9 +24,11 @@ using namespace std;
 int main()
 {
 	// constants and variables
+	int playerChoice;
 
 
 	// intro
+	cout << "Lost in the Everglades" << endl;
 
 	// pretty sure driving menu with a switch-case, but idk yet
 
