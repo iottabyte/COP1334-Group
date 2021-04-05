@@ -58,7 +58,9 @@ Updating local and server files:
 1 - Make sure to always "Pull" before working on a file in order to have latest version
 
 2 - When done working on a file, commit changes and include message (optional I guess)
-    and then "Push" to update on server (very important! committing is not pushing!)
+
+3 - and then "Push" to update on server (very important! committing is not pushing!)
+    
     
     
 Ofc, you can always text me if you're confused!
