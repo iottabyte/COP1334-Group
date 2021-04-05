@@ -8,9 +8,11 @@ Class group project: "Lost in the Everglades" or something...
 Group Members:
 
 
-Brian 
-Jayde Shaw
-Kim Claros
+  Brian 
+  
+  Jayde Shaw
+  
+  Kim Claros
 
 
 
@@ -46,7 +48,7 @@ Option 2:
   
       https://github.com/iottabyte/COP1334-Group.git
       
-   and then select where to save on your PC.
+   4 - Select where to save on your PC.
       
   All done!
   
@@ -58,9 +60,12 @@ Updating local and server files:
 
 1 - Make sure to always "Pull" before working on a file in order to have latest version
 
-2 - When done working on a file, commit changes and include message (optional I guess)
+2 - When done working on a file:
 
-3 - and then "Push" to update on server (very important! committing is not pushing!)
+    i.   save
+    ii.  stage changes (this can be done by either right clicking or pressing + for 'Stage All' in Git tab)
+    iii. commit & include message
+    iv.  "Push" to update on server (very important! committing is not pushing!)
     
     
     
