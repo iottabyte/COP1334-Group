@@ -8,12 +8,11 @@ Class group project: "Lost in the Everglades" or something...
 Group Members:
 
 
-  Brian 
-  
-  Jayde Shaw
-  
-  Kim Claros
+  Brian, Jayde Shaw, Kim Claros
 
+
+
+- !! FIRST, make an account and send me your usernames so I can add you as collaborators !!
 
 
 Instructions for VS on Windows:
@@ -53,10 +52,10 @@ Option 2:
   All done!
   
   
---------------------------------
+-------------------------------
 
 Updating local and server files:
-
+-------------------------------
 
 1 - Make sure to always "Pull" before working on a file in order to have latest version
 
