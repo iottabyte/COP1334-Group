@@ -21,6 +21,7 @@ In Visual Studio:
 
 
   Download GitHub extension by searching for in the "Manage Extensions" window of the Extensions tab.
+  
      * GitHub should be at top of Most Downloaded *
 
 
