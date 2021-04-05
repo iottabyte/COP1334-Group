@@ -68,7 +68,20 @@ Updating local and server files:
     iv.  "Push" to update on server (very important! committing is not pushing!)
     
     
-    
+
+
+Instructions for VS on Mac OS:
+-------------------------------
+
+Download GitHub extension for VSCode.
+
+I also suggest downloading the GitHub desktop app if you're not comfortable using the commands in terminal to pull and push changes.
+
+( Although... if you're coding AND debugging on Mac, I wanna talk!? bc I've tried the Xcode method and it only works for me sometimes!??!!! )
+
+
+
+
 Ofc, you can always text me if you're confused!
 - K
     
