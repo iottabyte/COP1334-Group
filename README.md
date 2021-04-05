@@ -45,7 +45,7 @@ Option 2:
   
       https://github.com/iottabyte/COP1334-Group.git
       
-      and then select where to save on your PC.
+   and then select where to save on your PC.
       
   All done!
   
