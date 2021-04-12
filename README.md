@@ -8,7 +8,7 @@ Class group project: "Lost in the Everglades" or something...
 Group Members:
 
 
-  Brian, Jayde Shaw, Kim Claros
+  Brian Durin, Jayde Shaw, Kim Claros
 
 
 
