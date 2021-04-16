@@ -5,11 +5,11 @@
 
 	[ desc ]
 
-	I:	initial menu choice, game decisions
+	Input:	initial menu choice, game decisions
 
-	P:
+	Processing:
 
-	O:	5 x 5 cell map (maybe expand on this?)
+	Output:	5 x 5 cell map (maybe expand on this?)
 */
 
 // header files
@@ -19,22 +19,22 @@
 #include <ctime>
 using namespace std;
 
-// global constants
+// Global constants
 
 
-// function prototypes
+// Function prototypes
 void gameRules();
 
 int main()
 {
-	// constants and variables
+	// Constants and Variables
 	int playerChoice;
 
-	// intro
+	// Intro
 	cout << "\n\t\tLost in the Everglades" << endl
 		<< "\t\t\tTHE GAME" << endl;
 
-	// pretty sure driving menu with a switch function
+	// Driving the menu and prompting user for choice
 	do
 	{
 		// display menu
@@ -80,14 +80,38 @@ void gameRules()
 	// i do NOT want to type this up
 	// but i will if no one else does
 	// D;
+	// Game rules
 
-	cout << "\nLost in the Everglades - Game Rules" << endl
+
+	cout << "\nLost in the Everglades" << endl <<
+			"\nGame Rules" << endl
 		<< "-------------------------------------" << endl;
 
-	// how to play
+	// Game objective and rules
 	cout << "\nYou are a ranger stationed at Everglades National Park," << endl
-		<< "and your objective is to rescue a group of stranded tourists" << endl
-		<< "before time runs out!" << endl;
+		<< "and your objective is to rescue a group of stranded tourists that are lost" << endl
+		<< "in the everglades before time runs out!" << endl;
+	cout << "\nThe everglades is represented by a 5x5 Matrix, and you"
+		<< " Ranger will begin your task in the upperleft corner of the park."
+		<< " The lost tourist are located at the bottom left." << endl;
+	cout << "You have 12 gongs of time to find and rescue the tourist"
+		<< "or they will perish."
+		<< "\nDuring your journey you may encounter dangers like Hungry Alligators,"
+		<< " Swarm of Giant Mosquitoes, Venomous Spider, or Python."
+		<< " When you do encounter danger, you have the option of fighting,"
+		<< " or hiding until they leave:"
+		<< "\n\tIf you wait you will move to your desired cell but lose 5 gongs of time."
+		<< "\n\tIf you fight & win you will move to your desired cell & lose 2 gongs of time."
+		<< "\n\tIf you fight & lose you will go back to your intital cell, lose 3 gongs of time,"
+		<< " and the danger will remain in the cell you lost the fight." << endl;
+
+		
+
+
+
+
+
+	
 
 	/*
 		- explain map
