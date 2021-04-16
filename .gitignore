@@ -6,3 +6,5 @@
 *.opendb
 *.lastbuildstate
 /Everglades The Game/Everglades The Game/Debug/Everglad.de6065c5.tlog
+*.db
+*.db-shm
