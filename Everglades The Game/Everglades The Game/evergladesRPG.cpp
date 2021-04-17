@@ -42,6 +42,7 @@ int main()
 {
 	// Constants and Variables
 	int playerChoice;
+	string move = "\nWhere would you like to move?\n(row & column): ";
 	char everglades[MAP][MAP] = { {'*', '*', '*', '*', '*'},
 								{'*', '*', '*', '*', '*'},
 								{'*', '*', '*', '*', '*'},
