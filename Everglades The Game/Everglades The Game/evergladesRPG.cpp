@@ -13,9 +13,11 @@
 			1. Display game rules
 			2. Start game
 					display map and gong countdown
-					prompt user for next move
+					prompt player (R) for next move
 						if danger is generated in next cell:
 							prompt user for choice: wait or fight
+					continue until time runs out or player reaches
+					the tourists (T)
 			3 - Quit
 
 	O:	1 - game rules
