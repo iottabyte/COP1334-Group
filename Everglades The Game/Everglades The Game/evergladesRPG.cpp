@@ -36,6 +36,7 @@ const int MAP = 5;		// size of map matrix
 
 // Function prototypes
 void gameRules();
+void dispMap(const char[][MAP]);
 
 int main()
 {
@@ -71,7 +72,9 @@ int main()
 
 			break;
 		case 2:		// let's play a game
-			;
+			
+			dispMap(everglades);
+
 			break;
 		case 3:		// quit
 			cout << "\n[some kind of quit message]" << endl;
@@ -139,9 +142,17 @@ void gameRules()
 }
 
 /*
-	function 2
-*/
+	void displayMap()
 
+	display an updated 5x5 map whenever called
+
+	return val: none
+*/
+void dispMap(const char arr[][MAP])
+{
+
+	return;
+}
 
 /*
 	function 3
