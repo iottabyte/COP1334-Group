@@ -41,7 +41,7 @@ void dispMap(const char[][MAP]);
 int main()
 {
 	// Constants and Variables
-	int playerChoice;
+	int playerChoice, row, column;
 	string move = "\nWhere would you like to move?\n(row & column): ";
 	char everglades[MAP][MAP] = { {'*', '*', '*', '*', '*'},
 								{'*', '*', '*', '*', '*'},
@@ -75,6 +75,15 @@ int main()
 		case 2:		// let's play a game
 			
 			dispMap(everglades);
+
+			// IS THIS ALL IN A LOOP? A DO-WHILE LOOP??
+
+			// display countdown somehow???
+
+			// prompt player for choice - AND VALIDATE
+				// (input < 1 || input > 5) 
+
+			//	drive choice - either show map again or call danger function?
 
 			break;
 		case 3:		// quit
