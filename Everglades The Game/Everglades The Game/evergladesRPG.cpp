@@ -3,13 +3,23 @@
 
 	evergladesRPG.cpp
 
-	[ desc ]
+	A text-based RPG in which a player traverses a 5x5 two-dimensional array
+	to rescue a group of lost tourists before time runs out.
 
-	Input:	initial menu choice, game decisions
+	I:	initial menu choice, cell values, danger-related decisions
 
-	Processing:
+	P:	1 -	display initial menu and prompt user for choice
+		2 - drive menu options
+			1. Display game rules
+			2. Start game
+					display map and gong countdown
+					prompt user for next move
+						if danger is generated in next cell:
+							prompt user for choice: wait or fight
+			3 - Quit
 
-	Output:	5 x 5 cell map (maybe expand on this?)
+	O:	1 - game rules
+		2 - everglades 5 x 5 map, timer, and player consequences
 */
 
 // header files
@@ -83,7 +93,7 @@ void gameRules()
 {
 	cout << "\nLost in the Everglades" << endl <<
 			"\n\tGame Rules" << endl
-		<< "-------------------------------------" << endl;
+		<< "----------------------------------" << endl;
 
 	// Game objective and rules
 	cout << "\nYou are a ranger stationed at Everglades National Park," << endl
