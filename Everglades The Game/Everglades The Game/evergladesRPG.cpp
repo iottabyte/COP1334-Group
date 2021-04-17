@@ -20,7 +20,7 @@
 using namespace std;
 
 // Global constants
-
+const int MAP = 5;		// size of map matrix
 
 // Function prototypes
 void gameRules();
@@ -29,6 +29,11 @@ int main()
 {
 	// Constants and Variables
 	int playerChoice;
+	char everglades[MAP][MAP] = { {'*', '*', '*', '*', '*'},
+								{'*', '*', '*', '*', '*'},
+								{'*', '*', '*', '*', '*'},
+								{'*', '*', '*', '*', '*'}, 
+								{'*', '*', '*', '*', 'T'} };
 
 	// Intro
 	cout << "\n\t\tLost in the Everglades" << endl
@@ -76,15 +81,8 @@ int main()
 */
 void gameRules()
 {
-	// imma be real wit u chief
-	// i do NOT want to type this up
-	// but i will if no one else does
-	// D;
-	// Game rules
-
-
 	cout << "\nLost in the Everglades" << endl <<
-			"\nGame Rules" << endl
+			"\n\tGame Rules" << endl
 		<< "-------------------------------------" << endl;
 
 	// Game objective and rules
@@ -93,8 +91,8 @@ void gameRules()
 		<< "in the everglades before time runs out!" << endl;
 	cout << "\nThe everglades is represented by a 5x5 Matrix, and you"
 		<< " Ranger will begin your task in the upperleft corner of the park."
-		<< " The lost tourist are located at the bottom left." << endl;
-	cout << "You have 12 gongs of time to find and rescue the tourist"
+		<< " The lost tourists are located at the bottom left." << endl;
+	cout << "\tTime Limit\nYou have 12 gongs of time to find and rescue the tourist"
 		<< "or they will perish."
 		<< "\nDuring your journey you may encounter dangers like Hungry Alligators,"
 		<< " Swarm of Giant Mosquitoes, Venomous Spider, or Python."
@@ -104,14 +102,6 @@ void gameRules()
 		<< "\n\tIf you fight & win you will move to your desired cell & lose 2 gongs of time."
 		<< "\n\tIf you fight & lose you will go back to your intital cell, lose 3 gongs of time,"
 		<< " and the danger will remain in the cell you lost the fight." << endl;
-
-		
-
-
-
-
-
-	
 
 	/*
 		- explain map
