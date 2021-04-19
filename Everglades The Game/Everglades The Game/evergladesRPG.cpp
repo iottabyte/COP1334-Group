@@ -38,7 +38,7 @@ const int MAP = 5;		// size of map matrix
 // Function prototypes
 void gameRules();
 void dispMap(const char[][MAP]);
-// void/bool testInput? validate input, determine if adjacent or not, determine if danger
+// void/bool testInput? determine if danger is in next space or not, also maybe validate as well
 // int danger?? in case of danger = true, return win (1) or loss (0) ??
 
 int main()
@@ -47,7 +47,7 @@ int main()
 	int playerChoice, row, column;
 	int gong = 12;		// gong counter
 	string move = "\nWhere would you like to move?\n(row & column): ";
-	char everglades[MAP][MAP] = { {' ', '*', '*', '*', '*'},
+	char everglades[MAP][MAP] = { {'*', '*', '*', '*', '*'},
 								{'*', '*', '*', '*', '*'},
 								{'*', '*', '*', '*', '*'},
 								{'*', '*', '*', '*', '*'}, 
@@ -64,11 +64,11 @@ int main()
 	do
 	{
 		// display menu
-		cout << "\nGame Menu" << endl
+		cout << "\n[just pick one]" << endl
 			<< "\n\t1 - See Rules" << endl
 			<< "\t2 - Play Game" << endl
 			<< "\t3 - Quit" << endl
-			<< "\nYour option? ";
+			<< "\n[so what is it]: ";
 		cin >> playerChoice;
 
 		switch (playerChoice)
@@ -99,7 +99,7 @@ int main()
 
 			break;
 		case 3:		// quit
-			cout << "\n[some kind of quit message]" << endl;
+			cout << "\nThank you for playing Lost in the Everglades..." << endl;
 			break;
 		default:	// error
 			cout << "\nERROR: Invalid selection. Please try again." << endl;
@@ -170,7 +170,7 @@ void gameRules()
 
 	return val: none
 */
-void dispMap(const char ev[][MAP])
+void dispMap(const char arr[][MAP])
 {
 	string space = " | ";		// for in between cells
 
@@ -187,6 +187,19 @@ void dispMap(const char ev[][MAP])
 
 /*
 	function 3
+	// void getDanger
+	// or void checkDanger
+	dangers located on the map
+	{						    {'R', '*', '*', '*', '*'},
+								{'*', '*', '*', '*', '*'},
+								{'*', '*', '*', '*', '*'},
+								{'*', '*', '*', '*', '*'},
+								{'*', '*', '*', '*', 'T'} };
+								Has to be ten
+								A - Hungry Alligators
+							    M - Swarm of Giant Mosquitoes
+								S - Venomous Spider
+								P - Python
 */
 
 
