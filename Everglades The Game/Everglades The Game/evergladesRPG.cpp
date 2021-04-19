@@ -170,7 +170,7 @@ void gameRules()
 
 	return val: none
 */
-void dispMap(const char arr[][MAP])
+void dispMap(const char ev[][MAP])
 {
 	string space = " | ";		// for in between cells
 
