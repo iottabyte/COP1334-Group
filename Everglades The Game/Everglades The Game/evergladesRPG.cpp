@@ -39,15 +39,15 @@ const int MAP = 5;		// size of map matrix
 void gameRules();
 void genDangers();		// generate dangers wit rand() function 
 void dispMap(char[][MAP]);
-bool validateMove(int, int, int&);
-int inDanger(char[][MAP], int&); 
+bool validateMove(int, int);
+int inDanger(char[][MAP], int, int, int&); 
 
 int main()
 {
 	// Constants and Variables
-	int playerChoice, row, column;
+	int playerChoice, row, col;
 	int gong = 12;		// gong counter
-	string move = "\nWhere would you like to move?\n(row & column): ";
+	string move = "\nWhich adjacent cell would you like to move to?\n(row & column): ";
 	char everglades[MAP][MAP] = { {' ', '*', '*', '*', '*'},
 								{'*', '*', '*', '*', '*'},
 								{'*', '*', '*', '*', '*'},
@@ -88,15 +88,35 @@ int main()
 			everglades[0][0] = ranger;
 			everglades[4][4] = tourist;
 
-			while (gong > 0 || ranger != tourist)
+			while (gong > 0)
 			{
 
-				dispMap(everglades);		// display map
-				cout << move;				// prompt player for move
-				cin >> row >> column;
-											// send input to validation function
+				dispMap(everglades);				// display map
+				cout << move;						// prompt player for move
+				cin >> row >> col;
 
+				// send input to validation function
+				do						
+				{
+					validateMove(row, col);
+					if (!validateMove)
+						cout << "\nInvalid cell. Please try again." << endl;
+				} while (!validateMove);
+
+				// check for danger
+				inDanger(everglades, row, col, gong);
+			
+				// win condition
+				if (ranger == tourist)
+				{
+					cout << "\nCongratulations, Ranger!\nYou found the lost tourists and led them to safety!" << endl;
+					break;
+				}
 			}
+
+			// losing message
+			if (gong == 0)
+				cout << "\nSorry...you ran out of time." << endl;		// maybe make this message better lol
 
 			break;
 		case 3:		// quit
@@ -218,14 +238,20 @@ void dispMap(char ev[][MAP])
 	may be better off as a different return type...
 	checks that move is within parameters (0 < x > 5), that it is
 	adjacent to current cell (HOW DO I DO THIS??), and that it
-	does not contain a Danger. updates gong counter if == true
+	does not contain a Danger
 
 	return val: true (if all is clear) or false
 */
-bool validateMove(int row, int col, int& gong)
+bool validateMove(int row, int col)
 {
-
-	return true;
+	if (
+		row < 1 || row > 4 ||
+		col < 1 || col > 4
+		)
+		return false;
+	// test for adjacentness (would this use -- & ++ ??)
+	else
+		return true;
 }
 
 /*
@@ -235,11 +261,11 @@ bool validateMove(int row, int col, int& gong)
 	for wait), randomly determines outcome of fight (gong -3 for
 	loss and -2 for win), and updates cell if danger is beaten
 
-	return val: outcome of encounter (0-2)
+	return val: outcome of encounter (0-3)
 */
-int inDanger(char ev[][MAP], int& gong)
+int inDanger(char ev[][MAP], int row, int col, int& gong)
 {
-	int outcome = 0;	// 0: wait, 1: win, 2: loss
+	int outcome = 0;	// 0: no danger, 1: wait, 2: win, 3: loss
 
 	return outcome;
 }
