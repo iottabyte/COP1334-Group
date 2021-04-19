@@ -29,6 +29,7 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
+#include <iomanip>
 using namespace std;
 
 // Global constants
@@ -37,22 +38,24 @@ const int MAP = 5;		// size of map matrix
 // Function prototypes
 void gameRules();
 void dispMap(const char[][MAP]);
-// void/bool testInput? determine if danger is in next space or not, also maybe validate as well
+// void/bool testInput? validate input, determine if adjacent or not, determine if danger
 // int danger?? in case of danger = true, return win (1) or loss (0) ??
 
 int main()
 {
 	// Constants and Variables
-	int playerChoice, row, column, counter = 12;
+	int playerChoice, row, column;
+	int gong = 12;		// gong counter
 	string move = "\nWhere would you like to move?\n(row & column): ";
-	char everglades[MAP][MAP] = { {'*', '*', '*', '*', '*'},
+	char everglades[MAP][MAP] = { {' ', '*', '*', '*', '*'},
 								{'*', '*', '*', '*', '*'},
 								{'*', '*', '*', '*', '*'},
 								{'*', '*', '*', '*', '*'}, 
-								{'*', '*', '*', '*', 'T'} };
+								{'*', '*', '*', '*', ' '} };
+	char ranger = 'R', tourist = 'T';
 
-	srand(time(0));		// seeding, but i'm not sure if i did it right
-						// also how do we make it generate a danger in an array element?
+	srand(time(0));		// seeding random function
+						
 	// Intro
 	cout << "\n\t\tLost in the Everglades" << endl
 		<< "\t\t\tTHE GAME" << endl;
@@ -61,11 +64,11 @@ int main()
 	do
 	{
 		// display menu
-		cout << "\n[just pick one]" << endl
+		cout << "\nGame Menu" << endl
 			<< "\n\t1 - See Rules" << endl
 			<< "\t2 - Play Game" << endl
 			<< "\t3 - Quit" << endl
-			<< "\n[so what is it]: ";
+			<< "\nYour option? ";
 		cin >> playerChoice;
 
 		switch (playerChoice)
@@ -78,16 +81,21 @@ int main()
 			break;
 		case 2:		// let's play a game
 			
-			dispMap(everglades);
+			cout << "\n[good luck ranger...]\nGAME START\n" << endl;
 
-			// IS THIS ALL IN A LOOP? A DO-WHILE LOOP??
+			// initialize placement (not even sure if this is a good idea)
+			everglades[0][0] = ranger;
+			everglades[4][4] = tourist;
 
-			// display countdown somehow???
+			while (gong > 0 || ranger != tourist)
+			{
 
-			// prompt player for choice - AND VALIDATE
-				// (input < 1 || input > 5) 
+				dispMap(everglades);		// display map
+				cout << move;				// prompt player for move
+				cin >> row >> column;
+											// send input to validation function
 
-			//	drive choice - either show map again or call danger function?
+			}
 
 			break;
 		case 3:		// quit
@@ -162,8 +170,17 @@ void gameRules()
 
 	return val: none
 */
-void dispMap(const char arr[][MAP])
+void dispMap(const char ev[][MAP])
 {
+	string space = " | ";		// for in between cells
+
+	cout << setw(6) << "0   1   2   3   4" << endl;
+		// damn, make a for-loop to eliminate these long ass lines of code:
+	cout << "0 " << space << ev[0][0] << space << ev[0][1] << space << ev[0][2] << space << ev[0][3] << space << ev[0][4] << space << endl;
+	cout << "1 " << space << ev[1][0] << space << ev[1][1] << space << ev[1][2] << space << ev[1][3] << space << ev[1][4] << space << endl;
+	cout << "2 " << space << ev[2][0] << space << ev[2][1] << space << ev[2][2] << space << ev[2][3] << space << ev[2][4] << space << endl;
+	cout << "3 " << space << ev[3][0] << space << ev[3][1] << space << ev[3][2] << space << ev[3][3] << space << ev[3][4] << space << endl;
+	cout << "4 " << space << ev[4][0] << space << ev[4][1] << space << ev[4][2] << space << ev[4][3] << space << ev[4][4] << space << endl;
 
 	return;
 }
