@@ -37,11 +37,13 @@ const int MAP = 5;		// size of map matrix
 // Function prototypes
 void gameRules();
 void dispMap(const char[][MAP]);
+// void/bool testInput? determine if danger is in next space or not, also maybe validate as well
+// int danger?? in case of danger = true, return win (1) or loss (0) ??
 
 int main()
 {
 	// Constants and Variables
-	int playerChoice, row, column;
+	int playerChoice, row, column, counter = 12;
 	string move = "\nWhere would you like to move?\n(row & column): ";
 	char everglades[MAP][MAP] = { {'*', '*', '*', '*', '*'},
 								{'*', '*', '*', '*', '*'},
@@ -49,6 +51,8 @@ int main()
 								{'*', '*', '*', '*', '*'}, 
 								{'*', '*', '*', '*', 'T'} };
 
+	srand(time(0));		// seeding, but i'm not sure if i did it right
+						// also how do we make it generate a danger in an array element?
 	// Intro
 	cout << "\n\t\tLost in the Everglades" << endl
 		<< "\t\t\tTHE GAME" << endl;
