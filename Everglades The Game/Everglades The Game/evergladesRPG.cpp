@@ -37,15 +37,18 @@ const int MAP = 5;		// size of map matrix
 // Function prototypes
 void gameRules();
 void dispMap(const char[][MAP]);
-// void/bool testInput? determine if danger is in next space or not, also maybe validate as well
-// int danger?? in case of danger = true, return win (1) or loss (0) ??
+// a function something like void getDanger 
+// maybe we also need a function for the time left so like void timer well int gongs like she said 
+// this shows us how much time we have left depending on the danger but in what way
+// void/bool testInput? determine if danger is in next space or not, also maybe validate as well // bool dangerTest
+// int danger?? in case of danger = true, return win (1) or loss (0) ?? 
 
 int main()
 {
 	// Constants and Variables
 	int playerChoice, row, column, counter = 12;
 	string move = "\nWhere would you like to move?\n(row & column): ";
-	char everglades[MAP][MAP] = { {'*', '*', '*', '*', '*'},
+	char everglades[MAP][MAP] = { {'R', '*', '*', '*', '*'},
 								{'*', '*', '*', '*', '*'},
 								{'*', '*', '*', '*', '*'},
 								{'*', '*', '*', '*', '*'}, 
@@ -61,11 +64,11 @@ int main()
 	do
 	{
 		// display menu
-		cout << "\n[just pick one]" << endl
+		cout << "\nPick one of the following choices..." << endl
 			<< "\n\t1 - See Rules" << endl
 			<< "\t2 - Play Game" << endl
 			<< "\t3 - Quit" << endl
-			<< "\n[so what is it]: ";
+			<< "\nChoice: ";
 		cin >> playerChoice;
 
 		switch (playerChoice)
@@ -91,7 +94,7 @@ int main()
 
 			break;
 		case 3:		// quit
-			cout << "\n[some kind of quit message]" << endl;
+			cout << "\nThank you for playing Lost in the Everglades..." << endl;
 			break;
 		default:	// error
 			cout << "\nERROR: Invalid selection. Please try again." << endl;
@@ -162,7 +165,9 @@ void gameRules()
 
 	return val: none
 */
-void dispMap(const char arr[][MAP])
+void dispMap(const char arr[][MAP]) // back row map and displaying map 
+									// FOR LOOP will draw all dangers 
+									// DASHES
 {
 
 	return;
@@ -170,6 +175,19 @@ void dispMap(const char arr[][MAP])
 
 /*
 	function 3
+	// void getDanger
+	// or void checkDanger
+	dangers located on the map
+	{						    {'R', '*', '*', '*', '*'},
+								{'*', '*', '*', '*', '*'},
+								{'*', '*', '*', '*', '*'},
+								{'*', '*', '*', '*', '*'},
+								{'*', '*', '*', '*', 'T'} };
+								Has to be ten
+								A - Hungry Alligators
+							    M - Swarm of Giant Mosquitoes
+								S - Venomous Spider
+								P - Python
 */
 
 
