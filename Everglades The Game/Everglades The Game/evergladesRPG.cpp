@@ -37,9 +37,10 @@ const int MAP = 5;		// size of map matrix
 
 // Function prototypes
 void gameRules();
-void dispMap(const char[][MAP]);
-// void/bool testInput? determine if danger is in next space or not, also maybe validate as well
-// int danger?? in case of danger = true, return win (1) or loss (0) ??
+void genDangers();		// generate dangers wit rand() function 
+void dispMap(char[][MAP]);
+bool validateMove(int, int, int&);
+int inDanger(char[][MAP], int&); 
 
 int main()
 {
@@ -47,7 +48,7 @@ int main()
 	int playerChoice, row, column;
 	int gong = 12;		// gong counter
 	string move = "\nWhere would you like to move?\n(row & column): ";
-	char everglades[MAP][MAP] = { {'*', '*', '*', '*', '*'},
+	char everglades[MAP][MAP] = { {' ', '*', '*', '*', '*'},
 								{'*', '*', '*', '*', '*'},
 								{'*', '*', '*', '*', '*'},
 								{'*', '*', '*', '*', '*'}, 
@@ -107,6 +108,30 @@ int main()
 	} while (playerChoice != 3);
 
 	return 0;
+}
+
+/*
+	void genDangers()
+
+	generates ten dangers at random and places them at
+	random elements of map array
+
+	dangers located on the map
+	{						    {'R', '*', '*', '*', '*'},
+								{'*', '*', '*', '*', '*'},
+								{'*', '*', '*', '*', '*'},
+								{'*', '*', '*', '*', '*'},
+								{'*', '*', '*', '*', 'T'} };
+								Has to be ten
+								A - Hungry Alligators
+								M - Swarm of Giant Mosquitoes
+								S - Venomous Spider
+								P - Python
+*/
+void genDangers()
+{
+
+	return;
 }
 
 /*
@@ -170,11 +195,11 @@ void gameRules()
 
 	return val: none
 */
-void dispMap(const char ev[][MAP])
+void dispMap(char ev[][MAP])
 {
 	string space = " | ";		// for in between cells
 
-	cout << setw(6) << "0   1   2   3   4" << endl;
+	cout << "     0   1   2   3   4" << endl;
 		// damn, make a for-loop to eliminate these long ass lines of code:
 	cout << "0 " << space << ev[0][0] << space << ev[0][1] << space << ev[0][2] << space << ev[0][3] << space << ev[0][4] << space << endl;
 	cout << "1 " << space << ev[1][0] << space << ev[1][1] << space << ev[1][2] << space << ev[1][3] << space << ev[1][4] << space << endl;
@@ -186,23 +211,35 @@ void dispMap(const char ev[][MAP])
 }
 
 /*
-	function 3
-	// void getDanger
-	// or void checkDanger
-	dangers located on the map
-	{						    {'R', '*', '*', '*', '*'},
-								{'*', '*', '*', '*', '*'},
-								{'*', '*', '*', '*', '*'},
-								{'*', '*', '*', '*', '*'},
-								{'*', '*', '*', '*', 'T'} };
-								Has to be ten
-								A - Hungry Alligators
-							    M - Swarm of Giant Mosquitoes
-								S - Venomous Spider
-								P - Python
-*/
+	gonna try...
 
+	bool validateMove()
+
+	may be better off as a different return type...
+	checks that move is within parameters (0 < x > 5), that it is
+	adjacent to current cell (HOW DO I DO THIS??), and that it
+	does not contain a Danger. updates gong counter if == true
+
+	return val: true (if all is clear) or false
+*/
+bool validateMove(int row, int col, int& gong)
+{
+
+	return true;
+}
 
 /*
-	function 4
+	int inDanger(char ev[][MAP], int& gong)
+
+	prompts player to choose wait or fight (updates gong counter -5
+	for wait), randomly determines outcome of fight (gong -3 for
+	loss and -2 for win), and updates cell if danger is beaten
+
+	return val: outcome of encounter (0-2)
 */
+int inDanger(char ev[][MAP], int& gong)
+{
+	int outcome = 0;	// 0: wait, 1: win, 2: loss
+
+	return outcome;
+}
