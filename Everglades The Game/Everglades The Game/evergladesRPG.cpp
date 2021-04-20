@@ -54,8 +54,6 @@ int main()
 								{'*', '*', '*', '*', '*'}, 
 								{'*', '*', '*', '*', ' '} };
 	char ranger = 'R', tourist = 'T';
-
-	srand(time(0));		// seeding random function
 						
 	// Intro
 	cout << "\n\t\tLost in the Everglades" << endl
@@ -150,6 +148,16 @@ int main()
 */
 void genDangers()
 {
+	int danger = 0;			// random danger
+	srand(time(NULL));		// seeding random function
+
+	// run generator 10 times
+	for (int i = 0; i < 10; i++)
+	{
+		// danger = rand() % 4 + 1; ??
+		// now place it in random cell 
+		// double for loop?
+	}
 
 	return;
 }
