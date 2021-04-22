@@ -28,6 +28,8 @@
 			TO DO LIST	(erase when complete)
 
 			- complete genDanger() function
+				- kim had the idea to randomly fill a 2nd array
+				- but that can be changed ofc bc it sounds hard lol
 			- find out how to validate against non-adjacent moves
 			- dispMap()
 				- fix non-updating issue
@@ -332,7 +334,8 @@ void inDanger(char ev[][MAP], int row, int col, int& gong)
 			{
 				cout << "\n...\nYou fight the " << dName[danger] << " and lose..." << endl
 					 << "You'll have to retreat and find a way around." << endl;
-				// update map with danger character
+				gong = gong - 5;
+				// update map with danger character (will this even work)
 				ev[row][col] = icon[danger];
 			}
 			else
