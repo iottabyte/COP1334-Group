@@ -54,6 +54,12 @@ int main()
 								{'*', '*', '*', '*', '*'}, 
 								{'*', '*', '*', '*', ' '} };
 	char ranger = 'R', tourist = 'T';
+	char key[MAP][MAP] = { {' ', '*', '*', '*', '*'},
+						 {'*', '*', '*', '*', '*'},
+						 {'*', '*', '*', '*', '*'},
+						 {'*', '*', '*', '*', '*'},
+						 {'*', '*', '*', '*', ' '} };
+	
 						
 	// Intro
 	cout << "\n\t\tLost in the Everglades" << endl
@@ -86,6 +92,8 @@ int main()
 			everglades[0][0] = ranger;
 			everglades[4][4] = tourist;
 
+			// genDangers();		// generate dangers and place in key array
+
 			while (gong > 0)
 			{
 
@@ -102,7 +110,19 @@ int main()
 				} while (!validateMove);
 
 				// check for danger
-				inDanger(everglades, row, col, gong);
+				if (key[row][col] == 'D')
+					inDanger(everglades, row, col, gong);
+				else								
+				{
+					// if no danger, move ranger to cell and gong--
+					ranger = everglades[row][col];
+					gong--;
+					cout << "\nCell (" << row << "," << col << ") is free...you advance!" << endl
+						 << "\nGongs Left: " << gong << endl;
+					
+					// now...SHOULD loop back to displaying map and prompting for move
+			
+				}
 			
 				// win condition
 				if (ranger == tourist)
@@ -146,15 +166,18 @@ int main()
 								S - Venomous Spider
 								P - Python
 */
-void genDangers()
+void genDangers(char key[][MAP])
 {
-	int danger = 0;			// random danger
+	char danger = 'D';		// random danger
+	char safe = '*';		// empty cell
 	srand(time(NULL));		// seeding random function
 
-	// run generator 10 times
+	// run generator 10 times or 25 times?? int i = 1; i < 24; i++
 	for (int i = 0; i < 10; i++)
 	{
-		// danger = rand() % 4 + 1; ??
+		// danger = rand() % 1; inital idea was danger = 0, safe = 1...
+		// but unless limiting to two 1's per row, there's the chance of
+		// generating more than 10 dangers
 		// now place it in random cell 
 		// double for loop?
 	}
