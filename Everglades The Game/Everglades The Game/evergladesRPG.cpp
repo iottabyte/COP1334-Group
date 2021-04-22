@@ -24,6 +24,18 @@
 		2 - everglades 5 x 5 map, timer, and player consequences
 */
 
+		/*
+			TO DO LIST	(erase when complete)
+
+			- complete genDanger() function
+			- find out how to validate against non-adjacent moves
+			- dispMap()
+				- fix non-updating issue
+				- replace 4 rows of cout with a for loop
+			- complete game writing (like the shit in [braces])
+			- make the game rules prettier (LOW PRIORITY)
+		*/
+
 // header files
 #include <iostream>
 #include <string>
@@ -40,7 +52,7 @@ void gameRules();
 void genDangers();		// generate dangers wit rand() function 
 void dispMap(char[][MAP]);
 bool validateMove(int, int);
-int inDanger(char[][MAP], int, int, int&); 
+void inDanger(char[][MAP], int, int, int&); 
 
 int main()
 {
@@ -200,12 +212,12 @@ void gameRules()
 
 	// Game objective and rules
 	cout << "\nYou are a ranger stationed at Everglades National Park," << endl
-		<< "and your objective is to rescue a group of stranded tourists that are lost" << endl
-		<< "in the everglades before time runs out!" << endl;
-	cout << "\nThe everglades is represented by a 5x5 Matrix, and you"
-		<< " Ranger will begin your task in the upperleft corner of the park."
+		<< "and your objective is to rescue a group of stranded tourists " << endl
+		<< "before time runs out!" << endl;
+	cout << "\nA map of the area is represented by a 5x5 matrix, and you, the "
+		<< "Ranger, will begin your task in the upperleft corner of the park."
 		<< " The lost tourists are located at the bottom left." << endl;
-	cout << "\tTime Limit\nYou have 12 gongs of time to find and rescue the tourist"
+	cout << "\tTime Limit\nYou have 12 gongs of time to find and rescue the tourists"
 		<< "or they will perish."
 		<< "\nDuring your journey you may encounter dangers like Hungry Alligators,"
 		<< " Swarm of Giant Mosquitoes, Venomous Spider, or Python."
@@ -225,13 +237,6 @@ void gameRules()
 		The ranger can only move to ibs adjacent or diagonal to the one they are in.
 		Ex: moving from Row 2 to 4 is not possible without first moving to a ib in Row 3
 
-		- explain dangers and how to proceed
-		The Everglades terrain is full of lurking dangers, ranging from mosquito swarms to
-		hungry alligators! The ranger can avoid them if you're lucky, but most times, you will
-		have to confront them or go around.
-		When a danger exists in a cell you wish to move to, you will be asked whether you wish
-		to fight or wait for the danger to pass.
-
 		- explain time
 	*/
 	cout << "\nThe game ends when either:" << endl
@@ -249,6 +254,7 @@ void gameRules()
 void dispMap(char ev[][MAP])
 {
 	string ib = " | ";		// for in between cells
+	int counter = 0;		// for displaying next to row
 
 	cout << "     0   1   2   3   4" << endl;
 		// damn, make a for-loop to eliminate these long ass lines of code:
@@ -285,23 +291,56 @@ bool validateMove(int row, int col)
 }
 
 /*
-	int inDanger(char ev[][MAP], int& gong)
+	void inDanger(char ev[][MAP], int& gong)
 
 	generates a danger and then prompts player to choose wait or fight (updates gong counter -5 for wait),
 	randomly determines outcome of fight (gong -3 for loss and -2 for win), and updates cell if danger is beaten
-
-	return val: outcome of encounter (0-3)
 */
-int inDanger(char ev[][MAP], int row, int col, int& gong)
+void inDanger(char ev[][MAP], int row, int col, int& gong)
 {
 	int danger = rand() % 3;				// 0 - 3 for 4 types of dangers
 	string dName[] = { "Alligator", "Swarm of Giant Mosquitos", "Venemous Spider", "Python" };
 	char icon[] = { 'A', 'M', 'S', 'P' };	// lol not even sure how I'm gonna update map yet
-	int outcome = 0;						// 0: no danger, 1: wait, 2: win, 3: loss
+	int move, outcome;
 
-	cout << "\nWatch out! There is a " << dName[danger] << " ahead!" << endl;
-
+	// danger sequence
+	cout << "\nWatch out! There is a " << dName[danger] << " ahead!" << endl
+		<< "\nWhat will you do?\n\t1 - Wait until it leaves.\n\t2 - Fight it." << endl;
 	
+	// validate
+	do
+	{
+		cout << "Your move: ";
+		cin >> move;
 
-	return outcome;
+		if (move < 1 || move > 2)
+		{
+			cout << "\nInvalid choice. Please choose 1 or 2." << endl;
+		}
+	} while (move < 1 || move > 2);
+
+	switch (move)
+	{
+		case 1:	// wait
+			cout << "\n...\n...\nThe " << dName[danger] << " is gone...you advance!" << endl;
+			gong--;
+			break;
+		case 2: // fight
+			outcome = rand() % 2;			// 0 - 2 to give player a greater chance at winning
+
+			if (outcome == 0)				// loss
+			{
+				cout << "\n...\nYou fight the " << dName[danger] << " and lose..." << endl
+					 << "You'll have to retreat and find a way around." << endl;
+				// update map with danger character
+				ev[row][col] = icon[danger];
+			}
+			else
+			{
+				;
+			}
+			break;
+	}
+
+	return;
 }
