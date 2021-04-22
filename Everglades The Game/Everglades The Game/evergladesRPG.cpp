@@ -33,6 +33,7 @@
 			- find out how to validate against non-adjacent moves
 			- dispMap()
 				- fix non-updating issue
+				- figure out how to blank previously occupied cell
 				- replace 4 rows of cout with a for loop
 			- complete game writing (like the shit in [braces])
 			- make the game rules prettier (LOW PRIORITY)
@@ -47,34 +48,31 @@
 using namespace std;
 
 // Global constants
-const int MAP = 5;		// size of map matrix
+const int MAP = 5;						// size of map matrix
 
 // Function prototypes
 void gameRules();
-void genDangers();		// generate dangers wit rand() function 
-void dispMap(char[][MAP]);
-bool validateMove(int, int);
-void inDanger(char[][MAP], int, int, int&); 
+void genDangers(int[][MAP]);			// generate dangers wit rand() function 
+void dispMap(char[][MAP], char);
+int validateMove(int, int, int, int);
+void inDanger(char[][MAP], int, int, int&, char&); 
 
 int main()
 {
 	// Constants and Variables
-	int playerChoice, row, col;
-	int gong = 12;		// gong counter
+	int playerChoice, row, col, error;
+	int x = 0;				// previous row, initialized to starting placement
+	int y = 0;				// previous column
+	int gong = 12;			// gong counter
 	string move = "\nWhich adjacent cell would you like to move to?\n(row & column): ";
-	char everglades[MAP][MAP] = { {' ', '*', '*', '*', '*'},
-								{'*', '*', '*', '*', '*'},
-								{'*', '*', '*', '*', '*'},
-								{'*', '*', '*', '*', '*'}, 
-								{'*', '*', '*', '*', ' '} };
+	char everglades[MAP][MAP] = { {' ', ' ', ' ', ' ', ' '},
+								{' ', ' ', ' ', ' ', ' '},
+								{' ', ' ', ' ', ' ', ' '},
+								{' ', ' ', ' ', ' ', ' '}, 
+								{' ', ' ', ' ', ' ', ' '} };
 	char ranger = 'R', tourist = 'T';
-	char key[MAP][MAP] = { {' ', '*', '*', '*', '*'},
-						 {'*', '*', '*', '*', '*'},
-						 {'*', '*', '*', '*', '*'},
-						 {'*', '*', '*', '*', '*'},
-						 {'*', '*', '*', '*', ' '} };
-	
-						
+	int key[MAP][MAP];		// int equivalent array holding location of dangers
+				
 	// Intro
 	cout << "\n\t\tLost in the Everglades" << endl
 		<< "\t\t\tTHE GAME" << endl;
@@ -100,38 +98,45 @@ int main()
 			break;
 		case 2:		// let's play a game
 			
-			cout << "\n[good luck ranger...]\nGAME START\n" << endl;
+			cout << "\nGood luck ranger...\n   GAME START\n" << endl;
 
 			// initialize placement (not even sure if this is a good idea)
 			everglades[0][0] = ranger;
 			everglades[4][4] = tourist;
 
-			// genDangers(key);						// generate dangers and place in key array
+			genDangers(key);						// generate dangers and place in key array
 
 			while (gong > 0)
 			{
-
-				dispMap(everglades);				// display map
+				// display map
+				dispMap(everglades, ranger);		
 				cout << "\nGongs Left: " << gong << endl;
 
 				// send input to validation function
 				do						
 				{
-					cout << move;						// prompt player for move
+					cout << move;					// prompt player for move
 					cin >> row >> col;
 
-					if (!validateMove(row, col))
-						cout << "\nInvalid cell. Please try again." << endl;
-				} while (!validateMove(row, col));
+					error = validateMove(row, col, x, y);
+
+					if (error == 1)
+						cout << "\nEntered cell is out of bounds. Please try again." << endl;
+					else if (error == 2)
+						cout << "Entered cell is not adjacent! Try again." << endl;
+
+				} while (error != 0);
 
 				// check for danger
-				if (key[row][col] == 'D')
-					inDanger(everglades, row, col, gong);
+				if (key[row][col] == 1)
+					inDanger(everglades, row, col, gong, ranger);
 				else								
 				{
 					// if no danger, move ranger to cell and gong--
-					ranger = everglades[row][col];
+					everglades[row][col] = ranger;
 					gong--;
+					x = row;
+					y = col;
 					cout << "\nCell (" << row << "," << col << ") is free...you advance!\n" << endl;
 					
 					// now...SHOULD loop back to displaying map and prompting for move
@@ -168,27 +173,26 @@ int main()
 	generates ten dangers at random and places them at
 	random elements of map array
 
-	dangers located on the map
-	{						    {'R', '*', '*', '*', '*'},
-								{'*', '*', '*', '*', '*'},
-								{'*', '*', '*', '*', '*'},
-								{'*', '*', '*', '*', '*'},
-								{'*', '*', '*', '*', 'T'} };
-								Has to be ten
-								A - Hungry Alligators
-								M - Swarm of Giant Mosquitoes
-								S - Venomous Spider
-								P - Python
+	{{'R', '*', '*', '*', '*'},
+	{'*', '*', '*', '*', '*'},
+	{'*', '*', '*', '*', '*'},
+	{'*', '*', '*', '*', '*'},
+	{'*', '*', '*', '*', 'T'}};
 */
-void genDangers(char key[][MAP])
+void genDangers(int key[][MAP])
 {
-	char danger = 'D';		// random danger
-	char safe = '*';		// empty cell
+	int danger = 1;			// random danger
+	int row, col;			// to be randomly generated
 	srand(time(NULL));		// seeding random function
 
 	// run generator 10 times or 25 times?? int i = 1; i < 24; i++
 	for (int i = 0; i < 10; i++)
 	{
+		row = rand() % 3 + 1;	// generate random x-coordinate 1-3
+		col = rand() % 3 + 1;	// generate random y-coordinate 1-3
+		
+		key[row][col] = danger;
+
 		// danger = rand() % 1; inital idea was danger = 0, safe = 1...
 		// but unless limiting to two 1's per row, there's the chance of
 		// generating more than 10 dangers
@@ -253,10 +257,10 @@ void gameRules()
 
 	return val: none
 */
-void dispMap(char ev[][MAP])
+void dispMap(char ev[][MAP], char pc)
 {
 	string ib = " | ";		// for in between cells
-	int counter = 0;		// for displaying next to row
+	int rn = 0;		// for displaying key next to rows
 
 	cout << "     0   1   2   3   4" << endl;
 		// damn, make a for-loop to eliminate these long ass lines of code:
@@ -270,26 +274,29 @@ void dispMap(char ev[][MAP])
 }
 
 /*
-	gonna try...
+	int validateMove()
 
-	bool validateMove()
-
-	may be better off as a different return type...
 	checks that move is within parameters (0 < x > 5), that it is adjacent to current cell (HOW DO I DO THIS??),
 	and that it does not contain a Danger? (can prob do this in main)
 
-	return val: true (if all is clear) or false
+	return val: 0 (if all is clear), 1 for out of bounds, 2 for non-adjacent
 */
-bool validateMove(int row, int col)
+int validateMove(int row, int col, int x, int y)
 {
-	if (
-		row < 1 || row > 4 ||
-		col < 1 || col > 4
-		)
-		return false;
-	// test for adjacentness (would this use -- & ++ ??)
+	int error;
+	
+	if (row < 1 || row > 4)					// if row is out of boundaries
+		error = 1;
+	else if (col < 1 || col > 4)			// if column is out of boundaries
+		error = 1;
+	else if (x < --row || x > ++row)		// if row input is not adjacent
+		error = 2;
+	else if (y < --col || y > ++col)		// if column input is not adjacent
+		error = 2;	
 	else
-		return true;
+		error = 0;
+
+	return error;
 }
 
 /*
@@ -298,7 +305,7 @@ bool validateMove(int row, int col)
 	generates a danger and then prompts player to choose wait or fight (updates gong counter -5 for wait),
 	randomly determines outcome of fight (gong -3 for loss and -2 for win), and updates cell if danger is beaten
 */
-void inDanger(char ev[][MAP], int row, int col, int& gong)
+void inDanger(char ev[][MAP], int row, int col, int& gong, char& pc)
 {
 	int danger = rand() % 3;				// 0 - 3 for 4 types of dangers
 	string dName[] = { "Alligator", "Swarm of Giant Mosquitos", "Venemous Spider", "Python" };
@@ -325,7 +332,7 @@ void inDanger(char ev[][MAP], int row, int col, int& gong)
 	{
 		case 1:	// wait
 			cout << "\n...\n...\nThe " << dName[danger] << " is gone...you advance!" << endl;
-			gong--;
+			gong = gong - 3;
 			break;
 		case 2: // fight
 			outcome = rand() % 2;			// 0 - 2 to give player a greater chance at winning
@@ -340,7 +347,10 @@ void inDanger(char ev[][MAP], int row, int col, int& gong)
 			}
 			else
 			{
-				;
+				cout << "\n...\nYou fight the " << dName[danger] << " and win! You advance." << endl;
+				gong = gong - 2;
+				// update player position
+				ev[row][col] = pc;
 			}
 			break;
 	}
