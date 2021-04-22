@@ -92,22 +92,23 @@ int main()
 			everglades[0][0] = ranger;
 			everglades[4][4] = tourist;
 
-			// genDangers();		// generate dangers and place in key array
+			// genDangers(key);						// generate dangers and place in key array
 
 			while (gong > 0)
 			{
 
 				dispMap(everglades);				// display map
-				cout << move;						// prompt player for move
-				cin >> row >> col;
+				cout << "\nGongs Left: " << gong << endl;
 
 				// send input to validation function
 				do						
 				{
-					validateMove(row, col);
-					if (!validateMove)
+					cout << move;						// prompt player for move
+					cin >> row >> col;
+
+					if (!validateMove(row, col))
 						cout << "\nInvalid cell. Please try again." << endl;
-				} while (!validateMove);
+				} while (!validateMove(row, col));
 
 				// check for danger
 				if (key[row][col] == 'D')
@@ -117,8 +118,7 @@ int main()
 					// if no danger, move ranger to cell and gong--
 					ranger = everglades[row][col];
 					gong--;
-					cout << "\nCell (" << row << "," << col << ") is free...you advance!" << endl
-						 << "\nGongs Left: " << gong << endl;
+					cout << "\nCell (" << row << "," << col << ") is free...you advance!\n" << endl;
 					
 					// now...SHOULD loop back to displaying map and prompting for move
 			
@@ -221,9 +221,9 @@ void gameRules()
 		The tourists in distress are located on the opposite side of the park.
 		Examine your map and decide which direction to move by entering a cell
 		postion when prompted.
-		Ex: entering "3 5" would move the ranger to the space located in Row 3, Column 5
-		The ranger can only move to spaces adjacent or diagonal to the one they are in.
-		Ex: moving from Row 2 to 4 is not possible without first moving to a space in Row 3
+		Ex: entering "3 5" would move the ranger to the ib located in Row 3, Column 5
+		The ranger can only move to ibs adjacent or diagonal to the one they are in.
+		Ex: moving from Row 2 to 4 is not possible without first moving to a ib in Row 3
 
 		- explain dangers and how to proceed
 		The Everglades terrain is full of lurking dangers, ranging from mosquito swarms to
@@ -248,15 +248,15 @@ void gameRules()
 */
 void dispMap(char ev[][MAP])
 {
-	string space = " | ";		// for in between cells
+	string ib = " | ";		// for in between cells
 
 	cout << "     0   1   2   3   4" << endl;
 		// damn, make a for-loop to eliminate these long ass lines of code:
-	cout << "0 " << space << ev[0][0] << space << ev[0][1] << space << ev[0][2] << space << ev[0][3] << space << ev[0][4] << space << endl;
-	cout << "1 " << space << ev[1][0] << space << ev[1][1] << space << ev[1][2] << space << ev[1][3] << space << ev[1][4] << space << endl;
-	cout << "2 " << space << ev[2][0] << space << ev[2][1] << space << ev[2][2] << space << ev[2][3] << space << ev[2][4] << space << endl;
-	cout << "3 " << space << ev[3][0] << space << ev[3][1] << space << ev[3][2] << space << ev[3][3] << space << ev[3][4] << space << endl;
-	cout << "4 " << space << ev[4][0] << space << ev[4][1] << space << ev[4][2] << space << ev[4][3] << space << ev[4][4] << space << endl;
+	cout << "0 " << ib << ev[0][0] << ib << ev[0][1] << ib << ev[0][2] << ib << ev[0][3] << ib << ev[0][4] << ib << endl;
+	cout << "1 " << ib << ev[1][0] << ib << ev[1][1] << ib << ev[1][2] << ib << ev[1][3] << ib << ev[1][4] << ib << endl;
+	cout << "2 " << ib << ev[2][0] << ib << ev[2][1] << ib << ev[2][2] << ib << ev[2][3] << ib << ev[2][4] << ib << endl;
+	cout << "3 " << ib << ev[3][0] << ib << ev[3][1] << ib << ev[3][2] << ib << ev[3][3] << ib << ev[3][4] << ib << endl;
+	cout << "4 " << ib << ev[4][0] << ib << ev[4][1] << ib << ev[4][2] << ib << ev[4][3] << ib << ev[4][4] << ib << endl;
 
 	return;
 }
@@ -267,9 +267,8 @@ void dispMap(char ev[][MAP])
 	bool validateMove()
 
 	may be better off as a different return type...
-	checks that move is within parameters (0 < x > 5), that it is
-	adjacent to current cell (HOW DO I DO THIS??), and that it
-	does not contain a Danger
+	checks that move is within parameters (0 < x > 5), that it is adjacent to current cell (HOW DO I DO THIS??),
+	and that it does not contain a Danger? (can prob do this in main)
 
 	return val: true (if all is clear) or false
 */
@@ -288,15 +287,21 @@ bool validateMove(int row, int col)
 /*
 	int inDanger(char ev[][MAP], int& gong)
 
-	prompts player to choose wait or fight (updates gong counter -5
-	for wait), randomly determines outcome of fight (gong -3 for
-	loss and -2 for win), and updates cell if danger is beaten
+	generates a danger and then prompts player to choose wait or fight (updates gong counter -5 for wait),
+	randomly determines outcome of fight (gong -3 for loss and -2 for win), and updates cell if danger is beaten
 
 	return val: outcome of encounter (0-3)
 */
 int inDanger(char ev[][MAP], int row, int col, int& gong)
 {
-	int outcome = 0;	// 0: no danger, 1: wait, 2: win, 3: loss
+	int danger = rand() % 3;				// 0 - 3 for 4 types of dangers
+	string dName[] = { "Alligator", "Swarm of Giant Mosquitos", "Venemous Spider", "Python" };
+	char icon[] = { 'A', 'M', 'S', 'P' };	// lol not even sure how I'm gonna update map yet
+	int outcome = 0;						// 0: no danger, 1: wait, 2: win, 3: loss
+
+	cout << "\nWatch out! There is a " << dName[danger] << " ahead!" << endl;
+
+	
 
 	return outcome;
 }
