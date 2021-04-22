@@ -39,7 +39,7 @@
 			- make the game rules prettier (LOW PRIORITY)
 		*/
 
-// header files
+// Header files
 #include <iostream>
 #include <string>
 #include <cstdlib>
@@ -270,7 +270,7 @@ void dispMap(char ev[][MAP])
 	int rn = 0;		// for displaying key next to rows
 
 	cout << "     0   1   2   3   4" << endl;
-		// damn, make a for-loop to eliminate these long ass lines of code:
+	// damn, make a for-loop to eliminate these long ass lines of code:
 	cout << "0 " << ib << ev[0][0] << ib << ev[0][1] << ib << ev[0][2] << ib << ev[0][3] << ib << ev[0][4] << ib << endl;
 	cout << "1 " << ib << ev[1][0] << ib << ev[1][1] << ib << ev[1][2] << ib << ev[1][3] << ib << ev[1][4] << ib << endl;
 	cout << "2 " << ib << ev[2][0] << ib << ev[2][1] << ib << ev[2][2] << ib << ev[2][3] << ib << ev[2][4] << ib << endl;
