@@ -84,11 +84,11 @@ int main()
 	do
 	{
 		// display menu
-		cout << "\n[just pick one]" << endl
+		cout << "\nChoose one of the following Game Choices:" << endl
 			<< "\n\t1 - See Rules" << endl
 			<< "\t2 - Play Game" << endl
 			<< "\t3 - Quit" << endl
-			<< "\n[so what is it]: ";
+			<< "\nGame Choice: ";
 		cin >> menuChoice;
 
 		switch (menuChoice)
@@ -220,27 +220,29 @@ void genDangers(int key[][MAP])
 */
 void gameRules()
 {
-	cout << "\nLost in the Everglades" << endl <<
-			"\n\tGame Rules" << endl
-		<< "----------------------------------" << endl;
-
-	// Game objective and rules
-	cout << "\nYou are a ranger stationed at Everglades National Park," << endl
-		<< "and your objective is to rescue a group of stranded tourists " << endl
-		<< "before time runs out!" << endl;
-	cout << "\nA map of the area is represented by a 5x5 matrix, and you, the "
-		<< "Ranger, will begin your task in the upperleft corner of the park."
-		<< " The lost tourists are located at the bottom left." << endl;
-	cout << "\tTime Limit\nYou have 12 gongs of time to find and rescue the tourists"
-		<< "or they will perish."
-		<< "\nDuring your journey you may encounter dangers like Hungry Alligators,"
-		<< " Swarm of Giant Mosquitoes, Venomous Spider, or Python."
-		<< " When you do encounter danger, you have the option of fighting,"
-		<< " or hiding until they leave:"
-		<< "\n\tIf you wait you will move to your desired cell but lose 5 gongs of time."
-		<< "\n\tIf you fight & win you will move to your desired cell & lose 2 gongs of time."
-		<< "\n\tIf you fight & lose you will go back to your intital cell, lose 3 gongs of time,"
-		<< " and the danger will remain in the cell you lost the fight." << endl;
+	// Putting title in the middle of screen
+	cout << setw(75);
+	cout << "Lost in the Everglades" << endl;
+	cout << setw(70);
+	cout << "Game Rules" << endl;
+	cout << "------------------------------------------------------------------------------------------------------------------------------" << endl;
+	// Game Rules
+	cout << "Hello Ranger you have been stationed at Everglades National Park,"
+		<< " a group of lost tourist need to be rescued"
+		<< " before time runs out!" << endl;
+		cout << "\nRanger, you will begin your task in the entrance of the park,"
+		<< " your goal is to get to the lost tourist on the other side of the park." << endl;
+	cout << "\n\t**You do have a Time Limit of 12 gongs of time to find and rescue the tourists"
+		<< "or else they will perish.**"
+		<< "\n\nDuring your journey of rescue you may encounter dangers like:" <<
+		"\n\t- Hungry Alligators"
+		<< "\n\t- Swarm of Giant Mosquitoes\n\t- Venomous Spider\n\t- Python"
+		<< "\n\nIf you do encounter one of these dangers, you will have to choices:"
+		<< "\n\t1. Fight the Danger\n\t2. Wait for the danger to leave"
+		<< "\n\n\t*Waiting - you will move to your desired cell but lose 5 gongs of time*"
+		<< "\n\t*Fight & win -  you will move to your desired cell & lose 2 gongs of time*"
+		<< "\n\t*Fight & lose - you will go back to your intital cell, lose 3 gongs of time,"
+		<< "\n\tand the danger will remain in the cell you lost the fight*" << endl;
 
 	/*
 		- explain map
