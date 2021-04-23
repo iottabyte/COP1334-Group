@@ -146,7 +146,7 @@ int main()
 				}
 			
 				// win condition
-				if (ranger == tourist)
+				if (ranger == everglades[4][4])
 				{
 					cout << "\nCongratulations, Ranger!\nYou found the lost tourists and led them to safety!" << endl;
 					break;
