@@ -21,20 +21,22 @@
 			3 - Quit
 
 	O:	1 - game rules
-		2 - everglades 5 x 5 map, timer, and player consequences
+		2 - everglades 5 x 5 map, countdown, and player consequences
 */
 
 		/*
 			TO DO LIST	(erase when complete)
 
 			- fix genDanger() function
-				- its only making 7 dangers
-			- fix validateMove()
-				- incorrectly rejecting SOME adjacent cells
+				- its only making 8 dangers and idk why
+				- but also would she even notice unless she
+				  turns cheats on smh cheater
 			- dispMap()
 				- figure out how to blank previously occupied cell
 						everglades[x][y] = '*'; ?? 
 				- replace 4 rows of cout with a for loop
+					already tried this and i don't think it's compatible with
+					updating ranger (R) placement
 			- complete game writing (like the shit in [braces])
 			- make the game rules prettier (LOW PRIORITY)
 		*/
@@ -55,12 +57,12 @@ void gameRules();
 void genDangers(int[][MAP]);			// generate dangers wit rand() function 
 void dispMap(char[][MAP]);
 int validateMove(int, int, int, int);
-void inDanger(char[][MAP], int, int, int&, char&); 
+void inDanger(char[][MAP], int, int, int&, int&, int&, char&);
 
 int main()
 {
 	// Constants and Variables
-	int playerChoice, row, col, error;
+	int menuChoice, row, col, error;
 	int x = 0;				// previous row, initialized to starting placement
 	int y = 0;				// previous column
 	int gong = 12;			// gong counter
@@ -87,9 +89,9 @@ int main()
 			<< "\t2 - Play Game" << endl
 			<< "\t3 - Quit" << endl
 			<< "\n[so what is it]: ";
-		cin >> playerChoice;
+		cin >> menuChoice;
 
-		switch (playerChoice)
+		switch (menuChoice)
 		{
 
 		case 1:		// rules
@@ -130,7 +132,7 @@ int main()
 
 				// check for danger
 				if (key[row][col] == 1)
-					inDanger(everglades, row, col, gong, ranger);
+					inDanger(everglades, row, col, gong, x, y, ranger);
 				else								
 				{
 					// if no danger, move ranger to cell and gong--
@@ -141,9 +143,6 @@ int main()
 					x = row;
 					y = col;
 					cout << "\nCell (" << row << "," << col << ") is free...you advance!\n" << endl;
-					
-					// now...SHOULD loop back to displaying map and prompting for move
-			
 				}
 			
 				// win condition
@@ -165,7 +164,7 @@ int main()
 		default:	// error
 			cout << "\nERROR: Invalid selection. Please try again." << endl;
 		}
-	} while (playerChoice != 3);
+	} while (menuChoice != 3);
 
 	return 0;
 }
@@ -173,8 +172,8 @@ int main()
 /*
 	void genDangers()
 
-	generates ten dangers at random and places them at
-	random elements of map array
+	generates random cells and places a danger in them based on a binary system
+	0 = safe, 1 = danger
 
 	{{'R', '*', '*', '*', '*'},
 	{'*', '*', '*', '*', '*'},
@@ -198,14 +197,16 @@ void genDangers(int key[][MAP])
 	}
 
 	// erase the /* */ to turn on cheats >:P
-	for (int r = 0; r < MAP; r++)
-	{
-		for (int c = 0; c < MAP; c++)
+	/*
+		for (int r = 0; r < MAP; r++)
 		{
-			cout << " " << key[r][c];
+			for (int c = 0; c < MAP; c++)
+			{
+				cout << " " << key[r][c];
+			}
+			cout << endl;
 		}
-		cout << endl;
-	}
+	*/
 
 	return;
 }
@@ -312,8 +313,9 @@ int validateMove(int row, int col, int x, int y)
 	generates a danger and then prompts player to choose wait or fight (updates gong counter -5 for wait),
 	randomly determines outcome of fight (gong -3 for loss and -2 for win), and updates cell if danger is beaten
 */
-void inDanger(char ev[][MAP], int row, int col, int& gong, char& pc)
+void inDanger(char ev[][MAP], int row, int col, int& gong, int& x, int& y, char& pc)
 {
+	srand(time(NULL));						// seeding random function (do i need to do this again?)
 	int danger = rand() % 3;				// 0 - 3 for 4 types of dangers
 	string dName[] = { "Hungry Alligator", "Swarm of Giant Mosquitos", "Venemous Spider", "Python" };
 	char icon[] = { 'A', 'M', 'S', 'P' };	
@@ -338,7 +340,8 @@ void inDanger(char ev[][MAP], int row, int col, int& gong, char& pc)
 	switch (move)
 	{
 		case 1:	// wait
-			cout << "\n...\n...\nThe " << dName[danger] << " is gone...you advance!" << endl;
+			cout << "\n... ... ...\n... ... ..." << endl
+				<< "The " << dName[danger] << " is gone...you advance!" << endl;
 			gong = gong - 3;
 			break;
 		case 2: // fight
@@ -346,7 +349,7 @@ void inDanger(char ev[][MAP], int row, int col, int& gong, char& pc)
 
 			if (outcome == 0)				// loss
 			{
-				cout << "\n...\nYou fight the " << dName[danger] << " and lose..." << endl
+				cout << "\n... ... ...\nYou fight the " << dName[danger] << " and lose..." << endl
 					 << "You'll have to retreat and find a way around." << endl;
 				gong = gong - 5;
 				// update map with danger character
@@ -354,10 +357,12 @@ void inDanger(char ev[][MAP], int row, int col, int& gong, char& pc)
 			}
 			else
 			{
-				cout << "\n...\nYou fight the " << dName[danger] << " and win! You advance." << endl;
+				cout << "\n... ... ...\nYou fight the " << dName[danger] << " and win! You advance." << endl;
 				gong = gong - 2;
-				// update player position
+				// update player position and previous position
 				ev[row][col] = pc;
+				x = row;
+				y = col;
 			}
 			break;
 	}
