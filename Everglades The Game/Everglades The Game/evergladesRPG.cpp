@@ -58,11 +58,6 @@ int main()
 	int x = 0;				// previous row, initialized to starting placement
 	int y = 0;				// previous column
 	string move = "\nWhich adjacent cell would you like to move to?\n(row & column): ";
-	char everglades[MAP][MAP] = { {' ', '*', '*', '*', '*'},
-								{'*', '*', '*', '*', '*'},
-								{'*', '*', '*', '*', '*'},
-								{'*', '*', '*', '*', '*'},
-								{'*', '*', '*', '*', ' '} };
 	char ranger = 'R', tourist = 'T';
 	// int equivalent array holding location of dangers
 	int key[MAP][MAP] = {{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0}};		
@@ -74,7 +69,13 @@ int main()
 	// Driving the menu and prompting user for choice
 	do
 	{
-		int gong = 12;		// gong counter
+		// defining gong counter and map array within loop
+		int gong = 12;		
+		char everglades[MAP][MAP] = { {' ', '*', '*', '*', '*'},
+									{'*', '*', '*', '*', '*'},
+									{'*', '*', '*', '*', '*'},
+									{'*', '*', '*', '*', '*'},
+									{'*', '*', '*', '*', ' '} };
 		
 		// display menu
 		cout << "\nChoose one of the following options:" << endl
@@ -147,12 +148,13 @@ int main()
 						<< "\n* You found the lost tourists and led them to safety! *" << endl;
 					for (int i = 0; i < 55; i++)
 						cout << '*';
+					cout << endl;
 					break;
 				}
 			}
 
 			// losing message
-			if (gong <= 0)
+			if (gong <= 0 && ranger != everglades[4][4])
 				cout << "\nSorry...you ran out of time." << endl;		// maybe make this message better lol
 
 			break;
