@@ -27,18 +27,10 @@
 		/*
 			TO DO LIST	(erase when complete)
 
-			- fix genDanger() function
-				- its only making 8 dangers and idk why
-				- but also would she even notice unless she
-				  turns cheats on smh cheater
 			- dispMap()
-				- figure out how to blank previously occupied cell
-						everglades[x][y] = '*'; ?? 
 				- replace 4 rows of cout with a for loop
 					already tried this and i don't think it's compatible with
 					updating ranger (R) placement
-			- complete game writing (like the shit in [braces])
-			- make the game rules prettier (LOW PRIORITY)
 		*/
 
 // Header files
@@ -65,30 +57,31 @@ int main()
 	int menuChoice, row, col, error;
 	int x = 0;				// previous row, initialized to starting placement
 	int y = 0;				// previous column
-	int gong = 12;			// gong counter
 	string move = "\nWhich adjacent cell would you like to move to?\n(row & column): ";
-	char everglades[MAP][MAP] = { {' ', ' ', ' ', ' ', ' '},
-								{' ', ' ', ' ', ' ', ' '},
-								{' ', ' ', ' ', ' ', ' '},
-								{' ', ' ', ' ', ' ', ' '}, 
-								{' ', ' ', ' ', ' ', ' '} };
+	char everglades[MAP][MAP] = { {' ', '*', '*', '*', '*'},
+								{'*', '*', '*', '*', '*'},
+								{'*', '*', '*', '*', '*'},
+								{'*', '*', '*', '*', '*'},
+								{'*', '*', '*', '*', ' '} };
 	char ranger = 'R', tourist = 'T';
 	// int equivalent array holding location of dangers
 	int key[MAP][MAP] = {{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0}};		
 				
 	// Intro
-	cout << "\n\t\tLost in the Everglades" << endl
-		<< "\t\t\tTHE GAME" << endl;
+	cout << "\n\tLost in the Everglades" << endl
+		<< "\t\tTHE GAME" << endl;
 
 	// Driving the menu and prompting user for choice
 	do
 	{
+		int gong = 12;		// gong counter
+		
 		// display menu
-		cout << "\nChoose one of the following Game Choices:" << endl
+		cout << "\nChoose one of the following options:" << endl
 			<< "\n\t1 - See Rules" << endl
 			<< "\t2 - Play Game" << endl
 			<< "\t3 - Quit" << endl
-			<< "\nGame Choice: ";
+			<< "\nYour choice: ";
 		cin >> menuChoice;
 
 		switch (menuChoice)
@@ -139,7 +132,7 @@ int main()
 					everglades[row][col] = ranger;
 					gong--;
 					// update previous position
-					// everglades[x][y] = '*';
+					everglades[x][y] = ' ';
 					x = row;
 					y = col;
 					cout << "\nCell (" << row << "," << col << ") is free...you advance!\n" << endl;
@@ -148,7 +141,12 @@ int main()
 				// win condition
 				if (ranger == everglades[4][4])
 				{
-					cout << "\nCongratulations, Ranger!\nYou found the lost tourists and led them to safety!" << endl;
+					for (int i = 0; i < 55; i++)
+						cout << '*';
+					cout << "\n*" << setw(15) << " " << "Congratulations, Ranger!" << setw(15) << '*'
+						<< "\n* You found the lost tourists and led them to safety! *" << endl;
+					for (int i = 0; i < 55; i++)
+						cout << '*';
 					break;
 				}
 			}
@@ -175,11 +173,11 @@ int main()
 	generates random cells and places a danger in them based on a binary system
 	0 = safe, 1 = danger
 
-	{{'R', '*', '*', '*', '*'},
+	{{' ', '*', '*', '*', '*'},
 	{'*', '*', '*', '*', '*'},
 	{'*', '*', '*', '*', '*'},
 	{'*', '*', '*', '*', '*'},
-	{'*', '*', '*', '*', 'T'}};
+	{'*', '*', '*', '*', ' '}};
 */
 void genDangers(int key[][MAP])
 {
@@ -221,43 +219,37 @@ void genDangers(int key[][MAP])
 void gameRules()
 {
 	// Putting title in the middle of screen
-	cout << setw(75);
+	cout << setw(55);
 	cout << "Lost in the Everglades" << endl;
-	cout << setw(70);
+	cout << setw(50);
 	cout << "Game Rules" << endl;
-	cout << "------------------------------------------------------------------------------------------------------------------------------" << endl;
+
+	for (int i = 1; i <= 90; i++)
+		cout << '-';
+	cout << endl;
+
 	// Game Rules
-	cout << "Hello Ranger you have been stationed at Everglades National Park,"
-		<< " a group of lost tourist need to be rescued"
+	cout << "Hello Ranger! You are stationed at Everglades National Park,"
+		<< "\nwhere a group of lost tourists need to be rescued"
 		<< " before time runs out!" << endl;
-		cout << "\nRanger, you will begin your task in the entrance of the park,"
-		<< " your goal is to get to the lost tourist on the other side of the park." << endl;
-	cout << "\n\t**You do have a Time Limit of 12 gongs of time to find and rescue the tourists"
-		<< "or else they will perish.**"
-		<< "\n\nDuring your journey of rescue you may encounter dangers like:" <<
-		"\n\t- Hungry Alligators"
-		<< "\n\t- Swarm of Giant Mosquitoes\n\t- Venomous Spider\n\t- Python"
-		<< "\n\nIf you do encounter one of these dangers, you will have to choices:"
-		<< "\n\t1. Fight the Danger\n\t2. Wait for the danger to leave"
+	cout << "\nUse your map to locate and may your way to the tourists," << endl
+		<< "but beware of dangers along the way!" << endl;
+	cout << "\nMany wild and territorial creatures lurk in the park," << endl
+		<< "such as alligators, giant mosquitos, venemous spiders, and enormous pythons!" << endl;
+	cout << "If you do encounter one of these dangers, you will have two choices:"
+		<< "\n\tFight or Wait."
 		<< "\n\n\t*Waiting - you will move to your desired cell but lose 5 gongs of time*"
 		<< "\n\t*Fight & win -  you will move to your desired cell & lose 2 gongs of time*"
-		<< "\n\t*Fight & lose - you will go back to your intital cell, lose 3 gongs of time,"
-		<< "\n\tand the danger will remain in the cell you lost the fight*" << endl;
+		<< "\n\t*Fight & lose - you will not move, lose 3 gongs of time,"
+		<< "\n\t and the danger will remain in the cell*" << endl;
 
-	/*
-		- explain map
-		The tourists in distress are located on the opposite side of the park.
-		Examine your map and decide which direction to move by entering a cell
-		postion when prompted.
-		Ex: entering "3 5" would move the ranger to the ib located in Row 3, Column 5
-		The ranger can only move to ibs adjacent or diagonal to the one they are in.
-		Ex: moving from Row 2 to 4 is not possible without first moving to a ib in Row 3
-
-		- explain time
-	*/
 	cout << "\nThe game ends when either:" << endl
-		<< "\n\tThe ranger rescues the group of tourists." << endl
-		<< "\n\tThe time expires and the fate of the tourists is forever unknown." << endl;
+		<< "\tThe ranger rescues the group of tourists." << endl
+		<< "\tThe time expires and the fate of the tourists is forever unknown." << endl;
+
+	for (int i = 1; i <= 90; i++)
+		cout << '-';
+	cout << endl;
 }
 
 /*
@@ -270,7 +262,6 @@ void gameRules()
 void dispMap(char ev[][MAP])
 {
 	string ib = " | ";		// for in between cells
-	int rn = 0;		// for displaying key next to rows
 
 	cout << "     0   1   2   3   4" << endl;
 	// damn, make a for-loop to eliminate these long ass lines of code:
@@ -363,6 +354,7 @@ void inDanger(char ev[][MAP], int row, int col, int& gong, int& x, int& y, char&
 				gong = gong - 2;
 				// update player position and previous position
 				ev[row][col] = pc;
+				ev[x][y] = ' ';
 				x = row;
 				y = col;
 			}
