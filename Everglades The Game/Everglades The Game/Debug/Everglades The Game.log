@@ -1,4 +1,4 @@
 ﻿  evergladesRPG.cpp
-C:\Users\iotta\source\repos\COP1334-Group\Everglades The Game\Everglades The Game\evergladesRPG.cpp(188,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\iotta\source\repos\COP1334-Group\Everglades The Game\Everglades The Game\evergladesRPG.cpp(313,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Everglades The Game.vcxproj -> C:\Users\iotta\source\repos\COP1334-Group\Everglades The Game\Debug\Everglades The Game.exe
+C:\Users\sexua\source\repos\COP1334-Group\Everglades The Game\Everglades The Game\evergladesRPG.cpp(188,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\sexua\source\repos\COP1334-Group\Everglades The Game\Everglades The Game\evergladesRPG.cpp(313,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Everglades The Game.vcxproj -> C:\Users\sexua\source\repos\COP1334-Group\Everglades The Game\Debug\Everglades The Game.exe

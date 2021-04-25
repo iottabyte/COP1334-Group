@@ -338,6 +338,11 @@ void inDanger(char ev[][MAP], int row, int col, int& gong, int& x, int& y, char&
 			cout << "\n... ... ...\n... ... ..." << endl
 				<< "The " << dName[danger] << " is gone...you advance!" << endl;
 			gong = gong - 3;
+			// update player position and previous position
+			ev[row][col] = pc;
+			ev[x][y] = ' ';
+			x = row;
+			y = col;
 			break;
 		case 2: // fight
 			outcome = rand() % 2;			// 0 - 2 to give player a greater chance at winning
