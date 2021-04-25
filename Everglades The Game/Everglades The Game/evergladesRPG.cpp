@@ -152,7 +152,7 @@ int main()
 			}
 
 			// losing message
-			if (gong == 0)
+			if (gong <= 0)
 				cout << "\nSorry...you ran out of time." << endl;		// maybe make this message better lol
 
 			break;
