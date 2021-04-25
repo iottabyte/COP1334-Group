@@ -157,6 +157,12 @@ int main()
 			if (gong <= 0 && ranger != everglades[4][4])
 				cout << "\nSorry...you ran out of time." << endl;		// maybe make this message better lol
 
+			// reset ranger and tourist positions
+			everglades[0][0] = ranger;
+			everglades[4][4] = tourist;
+			x = 0;
+			y = 0;
+
 			break;
 		case 3:		// quit
 			cout << "\nThank you for playing Lost in the Everglades..." << endl;
