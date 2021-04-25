@@ -1,4 +1,5 @@
 ﻿  evergladesRPG.cpp
-C:\Users\17864\OneDrive\Documents\GitHub\COP1334-Group\Everglades The Game\Everglades The Game\evergladesRPG.cpp(186,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\17864\OneDrive\Documents\GitHub\COP1334-Group\Everglades The Game\Everglades The Game\evergladesRPG.cpp(311,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Everglades The Game.vcxproj -> C:\Users\17864\OneDrive\Documents\GitHub\COP1334-Group\Everglades The Game\Debug\Everglades The Game.exe
+C:\Users\jaydi\OneDrive\Intro to C++\lostInEverglades\Everglades The Game\Everglades The Game\evergladesRPG.cpp(186,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\jaydi\OneDrive\Intro to C++\lostInEverglades\Everglades The Game\Everglades The Game\evergladesRPG.cpp(311,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  LINK : C:\Users\jaydi\OneDrive\Intro to C++\lostInEverglades\Everglades The Game\Debug\Everglades The Game.exe not found or not built by the last incremental link; performing full link
+  Everglades The Game.vcxproj -> C:\Users\jaydi\OneDrive\Intro to C++\lostInEverglades\Everglades The Game\Debug\Everglades The Game.exe

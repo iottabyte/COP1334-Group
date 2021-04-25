@@ -6,22 +6,22 @@
 	A text-based RPG in which a player traverses a 5x5 two-dimensional array
 	to rescue a group of lost tourists before time runs out.
 
-	I:	initial menu choice, cell values, danger-related decisions
+	Input:	initial menu choice, cell values, danger-related decisions
 
-	P:	1 -	display initial menu and prompt user for choice
+	Processing:	1 -	display initial menu and prompt user for choice
 		2 - drive menu options
 			1. Display game rules
 			2. Start game
-					display map and gong countdown
-					prompt player (R) for next move
-						if danger is generated in next cell:
-							prompt user for choice: wait or fight
-					continue until time runs out or player reaches
+					Display map and gong countdown
+					Prompt player (R) for next move
+						If danger is generated in next cell:
+							Prompt user for choice: wait or fight
+					Continue until time runs out or player reaches
 					the tourists (T)
 			3 - Quit
 
-	O:	1 - game rules
-		2 - everglades 5 x 5 map, countdown, and player consequences
+	Output:	1 - Game Rules
+			2 - Everglades 5 x 5 map, countdown, and player consequences
 */
 
 		/*
